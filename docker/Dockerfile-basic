@@ -1,0 +1,26 @@
+# ========== 基础镜像（生产首选，无坑） ==========
+FROM python:3.11-slim as builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 设置环境变量（生产环境核心配置，必加）
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
+
+# 安装系统依赖（解决python-magic/libmagic问题，你的项目必加）
+# 预装gcc是为了兼容部分需要编译的Python包，slim版自带但保险起见写上
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libmagic1 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# 复制依赖文件，利用Docker层缓存（核心优化，构建提速）
+COPY requirements.txt .
+
+# 安装Python依赖
+RUN pip install -r requirements.txt
+

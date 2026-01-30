@@ -3,10 +3,10 @@
 # 支持：本地开发(Mac/Linux) | Docker | Kubernetes | CI/CD
 # ==============================================================================
 
-PROJECT_NAME := fastapi-project
+PROJECT_NAME := $(shell basename $(pwd) | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 IMAGE_NAME ?= $(PROJECT_NAME)
 IMAGE_TAG ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo "latest")
-REGISTRY ?= localhost:5000
+REGISTRY ?= registry.cn-hangzhou.aliyuncs.com/macroldj
 
 # 路径与命令检测
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -86,7 +86,7 @@ dev: ## 开发模式（热重载）
 .PHONY: run-web
 run-web: ## 生产模式运行 Web 服务（单进程高并发）
 	@echo "$(CYAN)>>> 启动生产服务器...$(NC)"
-	uvicorn main:app --host 0.0.0.0 --port 8000 --loop uvloop --http httptools --proxy-headers
+	uvicorn main:app --host 0.0.0.0 --port 8000 --loop uvloop --http httptools --proxy-headers --limit-concurrency 300 --timeout-keep-alive 5 --workers 2
 
 .PHONY: run-worker
 run-worker: ## 启动后台任务 worker

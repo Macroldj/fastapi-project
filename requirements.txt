@@ -22,3 +22,4 @@ asyncpg~=0.30.0
 httpx[http2]~=0.28.1
 httpx-socks[asyncio,trio]~=0.10.0
 aiofiles~=25.1.0
+greenlet==3.3.1

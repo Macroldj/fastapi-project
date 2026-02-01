@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base_model import TableModel
-from app.types import GENDER_TYPE, USER_STATE_TYPE
+from app.common import GENDER_TYPE, USER_STATE_TYPE
 
 # 定义 PostgreSQL 枚举类型
 USER_STATE_PG_TYPE = ENUM(*USER_STATE_TYPE.__args__, name='user_state_type')

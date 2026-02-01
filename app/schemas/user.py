@@ -1,7 +1,7 @@
 from pydantic import Field
 
 from app.schemas.base import BaseSc
-from app.types import GENDER_TYPE
+from app.common import GENDER_TYPE
 
 
 class UserCreateReqSc(BaseSc):

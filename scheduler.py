@@ -2,7 +2,7 @@ import asyncio
 import logging
 
 from app.providers import logging_provider
-from bootstrap.scheduler import create_asyncio_scheduler
+from boots.scheduler import create_asyncio_scheduler
 
 logging_provider.register()
 

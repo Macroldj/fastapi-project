@@ -103,7 +103,7 @@ class ServerManager:
         config = get_server_config()
 
         print(f"🚀 启动模式: {'开发' if settings.DEBUG else '生产'}")
-        print(f"📡 监听地址: http://{settings.SERVER_HOST}:{settings.SERVER_PORT}")
+        print(f"📡 监听地址: http://{settings.SERVER_DOMAIN}:{settings.SERVER_PORT}")
 
         if not settings.DEBUG:
             print(f"🔧 Workers: {config['workers']}")

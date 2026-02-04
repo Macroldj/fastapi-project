@@ -129,10 +129,10 @@ docker-compose -f docker-compose-middleware.yaml down
 
 ```bash
 # 复制环境变量模板到项目根目录（供应用程序使用）
-cp .env.example .env
+cp env.example .env
 
 # 如果使用 Docker 方式，还需要复制一份到 docker 目录（供 Docker Compose 使用）
-cp .env.example docker/.env
+cp env.example docker/.env
 
 # 编辑环境变量文件
 # 开发环境：可以直接使用模板中的默认值

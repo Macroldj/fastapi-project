@@ -7,7 +7,7 @@ venv
 .vscode/tasks.json
 *.swp
 .env
-.env.example
+env.example
 .env.local
 .env.local.example
 .env.test
